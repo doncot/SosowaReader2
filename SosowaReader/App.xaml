@@ -1,0 +1,10 @@
+﻿<prism:PrismApplication
+    x:Class="SosowaReader.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SosowaReader"
+    xmlns:prism="using:Prism.Windows"
+    xmlns:windows="using:Prism.Unity.Windows"
+    RequestedTheme="Light">
+
+</prism:PrismApplication>
