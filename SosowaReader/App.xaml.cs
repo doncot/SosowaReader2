@@ -2,6 +2,10 @@
 using Windows.ApplicationModel.Activation;
 using Prism.Unity.Windows;
 using Prism.Windows;
+using Windows.UI.Xaml.Data;
+using Prism.Mvvm;
+using SosowaReader.Views;
+using SosowaReader.ViewModels;
 
 namespace SosowaReader
 {
@@ -24,6 +28,13 @@ namespace SosowaReader
             NavigationService.Navigate("Main", null);
 
             return Task.FromResult<object>(null);
+        }
+
+        protected override Task OnInitializeAsync(IActivatedEventArgs args)
+        {
+            ViewModelLocationProvider.Register(typeof(MainPage).ToString(), () => new MainPageViewModel(NavigationService));
+
+            return base.OnInitializeAsync(args);
         }
 
         /// <summary>

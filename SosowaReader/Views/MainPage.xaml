@@ -1,12 +1,30 @@
-﻿<Page
+﻿<prism:SessionStateAwarePage
     x:Class="SosowaReader.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SosowaReader.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="using:Prism.Windows.Mvvm"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="test" />
+        <!--<TextBlock Text="XXX!!" FontSize="100" Foreground="Black" />-->
+        <StackPanel>
+            <Button Content="button" />
+            <TextBlock Text="{Binding TestString}" FontSize="100" Foreground="Black" />
+            <ListBox ItemsSource="{Binding Works}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Title}" Padding="8 0" />
+                            <TextBlock Text="{Binding Author}" Padding="8 0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+        </StackPanel>
     </Grid>
-</Page>
+</prism:SessionStateAwarePage>
