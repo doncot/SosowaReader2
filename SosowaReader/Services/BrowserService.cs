@@ -10,7 +10,7 @@ namespace SosowaReader.Services
 {
     public class BrowserService
     {
-        readonly String MainPageUrl = "http://coolier.dip.jp/sosowa/ssw_l/";
+        readonly String MainPageUrl = "http://coolier.dip.jp/sosowa/ssw_l/212";
 
         public async Task<List<Work>> LoadMainPageAsync()
         {

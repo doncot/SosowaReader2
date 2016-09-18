@@ -10,18 +10,18 @@ namespace SosowaReader.Views
     /// </summary>
     public sealed partial class MainPage : SessionStateAwarePage
     {
-        private MainPageViewModel vm;
+        //private MainPageViewModel vm;
 
         public MainPage()
         {
             this.InitializeComponent();
 
-            vm = DataContext as MainPageViewModel;
+            //vm = DataContext as MainPageViewModel;
         }
 
-        private async void SessionStateAwarePage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            await vm.Refresh();
-        }
+        //private async void SessionStateAwarePage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        //{
+        //    await vm.Refresh();
+        //}
     }
 }

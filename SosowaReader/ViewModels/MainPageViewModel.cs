@@ -7,6 +7,7 @@ using SosowaReader.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
 using Windows.UI.Core;
 
 namespace SosowaReader.ViewModels
@@ -16,12 +17,23 @@ namespace SosowaReader.ViewModels
         //private INavigationService navigationService;
         //public DelegateCommand NavigateCommand { get; set; }
 
+        private DelegateCommand loadedCommand;
+        public DelegateCommand LoadedCommand
+        {
+            get
+            {
+                return this.loadedCommand = this.loadedCommand ??
+                    DelegateCommand.FromAsyncHandler(Refresh);
+            }
+        }
+
 
         public MainPageViewModel(INavigationService navigationService)
         {
             //this.navigationService = navigationService;
 
-            Task.Run(() => Refresh());
+            //Task.Run(() => Refresh());
+
             //await Task.Run(async () =>
             //{
             //await CoreDispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh() );
