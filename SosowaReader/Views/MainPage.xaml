@@ -14,16 +14,16 @@
         <StackPanel>
             <Button Content="button" />
             <TextBlock Text="{Binding TestString}" FontSize="100" Foreground="Black" />
-            <ListBox ItemsSource="{Binding Works}">
-                <ListBox.ItemTemplate>
+            <ListView ItemsSource="{Binding Works}">
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Title}" Padding="8 0" />
                             <TextBlock Text="{Binding Author}" Padding="8 0"/>
                         </StackPanel>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </ListView.ItemTemplate>
+            </ListView>
             
         </StackPanel>
     </Grid>
