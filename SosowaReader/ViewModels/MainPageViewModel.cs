@@ -14,8 +14,8 @@ namespace SosowaReader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        //private INavigationService navigationService;
-        //public DelegateCommand NavigateCommand { get; set; }
+        private INavigationService contentPageNavigationService;
+        public DelegateCommand ContentPageNavigateCommand { get; set; }
 
         private DelegateCommand loadedCommand;
         public DelegateCommand LoadedCommand
@@ -24,13 +24,27 @@ namespace SosowaReader.ViewModels
             {
                 return this.loadedCommand = this.loadedCommand ??
                     DelegateCommand.FromAsyncHandler(Refresh);
+                // new DelegateCommand(Refresh); //同期版
+            }
+        }
+
+        private DelegateCommand selectionChangedCommand;
+        public DelegateCommand SelectionChangedommand
+        {
+            get
+            {
+                return this.selectionChangedCommand = this.selectionChangedCommand ??
+                    new DelegateCommand(LoadContentPage);
             }
         }
 
 
+
         public MainPageViewModel(INavigationService navigationService)
         {
-            //this.navigationService = navigationService;
+            //これいる？
+            //this.contentPageNavigationService = navigationService;
+            ContentPageNavigateCommand = new DelegateCommand(() => navigationService.Navigate("Content", null));
 
             //Task.Run(() => Refresh());
 
@@ -45,8 +59,11 @@ namespace SosowaReader.ViewModels
         {
             var service = new BrowserService();
             Works = await service.LoadMainPageAsync();
+        }
 
-            //Works = new List<Work> { new Work { Title = "test" } };
+        public void LoadContentPage()
+        {
+
         }
 
         private List<Work> works = new List<Work>();

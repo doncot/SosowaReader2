@@ -19,19 +19,21 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <!--<TextBlock Text="XXX!!" FontSize="100" Foreground="Black" />-->
-        <StackPanel>
-            <Button Content="button" />
-            <ListView ItemsSource="{Binding Works, Mode=TwoWay}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Title}" Padding="8 0" />
-                            <TextBlock Text="{Binding Author}" Padding="8 0"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            
-        </StackPanel>
+        <ListView ItemsSource="{Binding Works, Mode=TwoWay}" SelectionMode="Single"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <interactivity:Interaction.Behaviors>
+                <interactions:EventTriggerBehavior EventName="SelectionChanged">
+                    <interactions:InvokeCommandAction Command="{Binding ContentPageNavigateCommand}"/>
+                </interactions:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Title}" Padding="8 0" />
+                        <TextBlock Text="{Binding Author}" Padding="8 0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </prism:SessionStateAwarePage>
