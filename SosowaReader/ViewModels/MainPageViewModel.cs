@@ -9,13 +9,13 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Navigation;
 
 namespace SosowaReader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        private INavigationService contentPageNavigationService;
-        public DelegateCommand ContentPageNavigateCommand { get; set; }
+        public DelegateCommand ContentPageNavigateCommand { set; get; }
 
         private DelegateCommand loadedCommand;
         public DelegateCommand LoadedCommand
@@ -28,23 +28,30 @@ namespace SosowaReader.ViewModels
             }
         }
 
-        private DelegateCommand selectionChangedCommand;
-        public DelegateCommand SelectionChangedommand
+        //private DelegateCommand selectionChangedCommand;
+        //public DelegateCommand SelectionChangedommand
+        //{
+        //    get
+        //    {
+        //        return this.selectionChangedCommand = this.selectionChangedCommand ??
+        //            new DelegateCommand(LoadContentPage);
+        //    }
+        //}
+
+        private List<Work> works = new List<Work>();
+        [RestorableState]
+        public List<Work> Works
         {
-            get
-            {
-                return this.selectionChangedCommand = this.selectionChangedCommand ??
-                    new DelegateCommand(LoadContentPage);
-            }
+            get { return works; }
+            set { SetProperty(ref works, value); }
         }
-
-
 
         public MainPageViewModel(INavigationService navigationService)
         {
             //これいる？
             //this.contentPageNavigationService = navigationService;
             ContentPageNavigateCommand = new DelegateCommand(() => navigationService.Navigate("Content", null));
+            
 
             //Task.Run(() => Refresh());
 
@@ -61,17 +68,17 @@ namespace SosowaReader.ViewModels
             Works = await service.LoadMainPageAsync();
         }
 
-        public void LoadContentPage()
+        public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> dictionary)
         {
-
+            base.OnNavigatedTo(e, dictionary);
         }
 
-        private List<Work> works = new List<Work>();
-        [RestorableState]
-        public List<Work> Works
+        public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
-            get { return works; }
-            set { SetProperty(ref works, value); }
+            viewModelState.Add("url", "test");
+            base.OnNavigatingFrom(e, viewModelState, suspending);
         }
+
+
     }
 }
