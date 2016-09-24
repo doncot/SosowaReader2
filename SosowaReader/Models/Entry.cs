@@ -6,14 +6,14 @@ namespace SosowaReader.Models
     /// <summary>
     /// 作品
     /// </summary>
-    public class Work
+    public class Entry
     {
         public String Title { get; set; }
 
         public String Author { get; set; }
 
         /// <summary>
-        /// 登校日
+        /// 投稿日
         /// </summary>
         public DateTime UploadDate { get; set; }
 
@@ -22,5 +22,7 @@ namespace SosowaReader.Models
         public int Size { get; set; }
 
         public String Summary { get; set; }
+        
+        public String Url { get; set; }
     }
 }

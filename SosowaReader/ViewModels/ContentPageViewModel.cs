@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
+using System.Reflection;
+using SosowaReader.Models;
 
 namespace SosowaReader.ViewModels
 {
@@ -23,7 +25,11 @@ namespace SosowaReader.ViewModels
         {
             base.OnNavigatedTo(e, dictionary);
 
-            Text = dictionary["url"] as String;
+            var url = e.Parameter as String;
+            if (!String.IsNullOrEmpty(url))
+            {
+                Text = url;
+            }
         }
 
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)

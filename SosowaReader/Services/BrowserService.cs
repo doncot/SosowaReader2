@@ -10,31 +10,47 @@ namespace SosowaReader.Services
 {
     public class BrowserService
     {
-        readonly String MainPageUrl = "http://coolier.dip.jp/sosowa/ssw_l/212";
+        readonly String MainPageUrl = "http://coolier.dip.jp/sosowa/ssw_l/";
 
-        public async Task<List<Work>> LoadMainPageAsync()
+        public async Task<List<Entry>> LoadMainPageAsync()
         {
-            List<Work> works = new List<Work>();
+            List<Entry> results = new List<Entry>();
 
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             string htmlString = await (new HttpClient()).GetStringAsync(MainPageUrl);
             htmlDoc.LoadHtml(htmlString);
 
+            var entries = htmlDoc.DocumentNode.Descendants("section")
+                .Where(x => x.GetAttributeValue("class", "") == "entries").Single()
+                .Descendants("tbody").Single()
+                .Descendants("tr")
+                .Where(x => x.GetAttributeValue("class", "").StartsWith("article"));
 
-            var nodes = htmlDoc.DocumentNode.Descendants("td")// タグ
-                .Where(x => x.GetAttributeValue("class", "") == "title"); //要素
 
-            foreach (var node in nodes)
+
+            //var nodes = htmlDoc.DocumentNode.Descendants("td")// タグ
+            //    .Where(x => x.GetAttributeValue("class", "") == "title"); //要素
+
+            foreach (var entry in entries)
             {
-                var titleNode = node.LastChild;
+                //タイトル
+                var title = entry.Descendants("a").First().InnerText;
+                //URL
+                var url = entry.Descendants("a").First().GetAttributeValue("href", "");
 
-                works.Add(new Work
+
+                //作者
+
+
+                //セット
+                results.Add(new Entry
                 {
-                    Title = titleNode.InnerText
+                    Title = title,
+                    Url = url,
                 });
             }
 
-            return works;
+            return results;
         }
     }
 }

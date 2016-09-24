@@ -10,12 +10,22 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Navigation;
+using System.Reflection;
+using System.Linq;
 
 namespace SosowaReader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        public DelegateCommand ContentPageNavigateCommand { set; get; }
+        private DelegateCommand selectionChangedCommand;
+        public DelegateCommand SelectionChangedCommand
+        {
+            set { selectionChangedCommand = value; }
+            get
+            {
+                return new DelegateCommand(NavigateToContentPage);
+            }
+        }
 
         private DelegateCommand loadedCommand;
         public DelegateCommand LoadedCommand
@@ -29,7 +39,7 @@ namespace SosowaReader.ViewModels
         }
 
         //private DelegateCommand selectionChangedCommand;
-        //public DelegateCommand SelectionChangedommand
+        //public DelegateCommand SelectionChangedCommand
         //{
         //    get
         //    {
@@ -38,34 +48,34 @@ namespace SosowaReader.ViewModels
         //    }
         //}
 
-        private List<Work> works = new List<Work>();
+        private List<Entry> entries = new List<Entry>();
         [RestorableState]
-        public List<Work> Works
+        public List<Entry> Entries
         {
-            get { return works; }
-            set { SetProperty(ref works, value); }
+            get { return entries; }
+            set { SetProperty(ref entries, value); }
         }
+
+        public Entry SelectedEntry { get; set; }
+        public int Index { get; set; }
+
+        private INavigationService NavigationService { get; }
 
         public MainPageViewModel(INavigationService navigationService)
         {
-            //これいる？
-            //this.contentPageNavigationService = navigationService;
-            ContentPageNavigateCommand = new DelegateCommand(() => navigationService.Navigate("Content", null));
-            
-
-            //Task.Run(() => Refresh());
-
-            //await Task.Run(async () =>
-            //{
-            //await CoreDispatcher.RunAsync(CoreDispatcherPriority.Normal, Refresh() );
-            //});
-
+            this.NavigationService = navigationService;
+            //ContentPageNavigateCommand = new DelegateCommand(() => navigationService.Navigate("Content", null));
         }
 
         public async Task Refresh()
         {
             var service = new BrowserService();
-            Works = await service.LoadMainPageAsync();
+            Entries = await service.LoadMainPageAsync();
+        }
+
+        public void NavigateToContentPage()
+        {
+            NavigationService.Navigate("Content", SelectedEntry.Url);
         }
 
         public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> dictionary)
@@ -75,7 +85,6 @@ namespace SosowaReader.ViewModels
 
         public override void OnNavigatingFrom(NavigatingFromEventArgs e, Dictionary<string, object> viewModelState, bool suspending)
         {
-            viewModelState.Add("url", "test");
             base.OnNavigatingFrom(e, viewModelState, suspending);
         }
 

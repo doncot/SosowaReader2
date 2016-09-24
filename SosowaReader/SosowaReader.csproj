@@ -97,7 +97,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Work.cs" />
+    <Compile Include="Models\Entry.cs" />
     <Compile Include="Services\BrowserService.cs" />
     <Compile Include="ViewModels\ContentPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

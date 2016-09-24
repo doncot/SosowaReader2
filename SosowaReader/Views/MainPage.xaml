@@ -9,8 +9,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    mc:Ignorable="d"
-    >
+    mc:Ignorable="d">
     <interactivity:Interaction.Behaviors>
         <interactions:EventTriggerBehavior EventName="Loaded">
             <interactions:InvokeCommandAction Command="{Binding LoadedCommand}"/>
@@ -18,12 +17,10 @@
     </interactivity:Interaction.Behaviors>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <!--<TextBlock Text="XXX!!" FontSize="100" Foreground="Black" />-->
-        <ListView ItemsSource="{Binding Works, Mode=TwoWay}" SelectionMode="Single"
-                    ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <ListView ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
             <interactivity:Interaction.Behaviors>
                 <interactions:EventTriggerBehavior EventName="SelectionChanged">
-                    <interactions:InvokeCommandAction Command="{Binding ContentPageNavigateCommand}"/>
+                    <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
                 </interactions:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
             <ListView.ItemTemplate>
