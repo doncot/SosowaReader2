@@ -70,7 +70,10 @@ namespace SosowaReader.ViewModels
         public async Task Refresh()
         {
             var service = new BrowserService();
-            Entries = await service.LoadMainPageAsync();
+            if (Entries?.Count == 0)
+            {
+                Entries = await service.LoadMainPageAsync();
+            }
         }
 
         public void NavigateToContentPage()
