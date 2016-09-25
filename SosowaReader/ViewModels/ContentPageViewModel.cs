@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using System.Reflection;
 using SosowaReader.Models;
+using SosowaReader.Services;
 
 namespace SosowaReader.ViewModels
 {
@@ -21,14 +22,19 @@ namespace SosowaReader.ViewModels
             set { SetProperty(ref text, value); }
         }
 
-        public override void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> dictionary)
+        public override async void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> dictionary)
         {
             base.OnNavigatedTo(e, dictionary);
 
             var url = e.Parameter as String;
             if (!String.IsNullOrEmpty(url))
             {
-                Text = url;
+                //本文をロード
+                var service = new BrowserService();
+                Entry entry = new Entry();
+                entry = await service.LoadContentAsync(url);
+                Text = entry.Title;
+
             }
         }
 

@@ -52,5 +52,23 @@ namespace SosowaReader.Services
 
             return results;
         }
+
+        public async Task<Entry> LoadContentAsync(String url)
+        {
+            var contentUri = new Uri(new Uri(MainPageUrl), url);
+
+            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            string htmlString = await(new HttpClient()).GetStringAsync(contentUri);
+            htmlDoc.LoadHtml(htmlString);
+
+            //h1要素は1つしかない
+            var titleNode = htmlDoc.DocumentNode.Descendants("h1").Single();
+
+            return new Entry
+            {
+                Title = titleNode.InnerText,
+
+            };
+        }
     }
 }

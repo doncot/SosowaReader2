@@ -24,5 +24,10 @@ namespace SosowaReader.Models
         public String Summary { get; set; }
         
         public String Url { get; set; }
+
+        /// <summary>
+        /// 本文
+        /// </summary>
+        public String Content { get; set; }
     }
 }
