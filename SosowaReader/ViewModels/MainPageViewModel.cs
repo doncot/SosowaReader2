@@ -27,28 +27,26 @@ namespace SosowaReader.ViewModels
             }
         }
 
-        private DelegateCommand loadedCommand;
         public DelegateCommand LoadedCommand
         {
             get
             {
-                return this.loadedCommand = this.loadedCommand ??
-                    DelegateCommand.FromAsyncHandler(Refresh);
+                return DelegateCommand.FromAsyncHandler(Load);
+                //return this.refreshCommand = this.refreshCommand ??
+                //    DelegateCommand.FromAsyncHandler(Refresh);
                 // new DelegateCommand(Refresh); //同期版
             }
         }
 
-        //private DelegateCommand selectionChangedCommand;
-        //public DelegateCommand SelectionChangedCommand
-        //{
-        //    get
-        //    {
-        //        return this.selectionChangedCommand = this.selectionChangedCommand ??
-        //            new DelegateCommand(LoadContentPage);
-        //    }
-        //}
+        public DelegateCommand RefreshCommand
+        {
+            get
+            {
+                return DelegateCommand.FromAsyncHandler(Refresh);
+            }
+        }
 
-        private List<Entry> entries = new List<Entry>();
+        private List<Entry> entries;
         [RestorableState]
         public List<Entry> Entries
         {
@@ -67,13 +65,29 @@ namespace SosowaReader.ViewModels
             //ContentPageNavigateCommand = new DelegateCommand(() => navigationService.Navigate("Content", null));
         }
 
-        public async Task Refresh()
+        /// <summary>
+        /// データをロードする。（既データがある場合スルーされる）
+        /// </summary>
+        /// <returns></returns>
+        public async Task Load()
         {
             var service = new BrowserService();
-            if (Entries?.Count == 0)
+            if(Entries == null || Entries.Count == 0)
             {
                 Entries = await service.LoadMainPageAsync();
             }
+        }
+
+        /// <summary>
+        /// データを再ロードする（既データは破棄される）
+        /// </summary>
+        /// <returns></returns>
+        public async Task Refresh()
+        {
+            var service = new BrowserService();
+            //ロード時に時間がかかるため、即開けておく
+            Entries = null;
+            Entries = await service.LoadMainPageAsync();
         }
 
         public void NavigateToContentPage()

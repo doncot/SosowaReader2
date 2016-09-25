@@ -16,8 +16,11 @@
         </interactions:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Button Content="&#8635;" Command="{Binding RefreshCommand}"
+                Height="32" />
+        <ListView Name="EntriesList" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
             <interactivity:Interaction.Behaviors>
                 <interactions:EventTriggerBehavior EventName="SelectionChanged">
                     <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
@@ -32,5 +35,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </Grid>
+    </StackPanel>
 </prism:SessionStateAwarePage>
