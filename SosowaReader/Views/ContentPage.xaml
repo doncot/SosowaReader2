@@ -8,8 +8,14 @@
     xmlns:prism="using:Prism.Windows.Mvvm"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="{Binding Text,Mode=TwoWay}" />
+        <Grid Name="wrapper" Margin="20 16" HorizontalAlignment="Center">
+            <ScrollViewer>
+                <TextBlock Text="{Binding ContentBody, Mode=TwoWay}" 
+                           LineHeight="2.5"
+                           TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </Grid>
+        <!--<WebView Source="http://coolier.dip.jp/sosowa/ssw_l/213/1474812077" />-->
     </Grid>
 </Page>

@@ -64,10 +64,19 @@ namespace SosowaReader.Services
             //h1要素は1つしかない
             var titleNode = htmlDoc.DocumentNode.Descendants("h1").Single();
 
+            //本文
+            var contentNode = htmlDoc.DocumentNode.Descendants("section")
+                .Where(x => x.GetAttributeValue("id", "") == "body").Single()
+                .Descendants("div")
+                .Where(x => x.GetAttributeValue("id", "") == "content").Single();
+            var contentBodyNode = contentNode.Descendants("div")
+                .Where(x => x.GetAttributeValue("id", "") == "contentBody").Single();
+            var convertedContent = contentBodyNode.InnerHtml.Replace("<br>", "\n");
+
             return new Entry
             {
                 Title = titleNode.InnerText,
-
+                Content = convertedContent,
             };
         }
     }

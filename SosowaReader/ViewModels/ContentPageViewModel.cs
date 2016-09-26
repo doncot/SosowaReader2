@@ -15,11 +15,11 @@ namespace SosowaReader.ViewModels
 {
     public class ContentPageViewModel : ViewModelBase
     {
-        private string text;
-        public string Text
+        private string contentBody;
+        public string ContentBody
         {
-            get { return text; }
-            set { SetProperty(ref text, value); }
+            get { return contentBody; }
+            set { SetProperty(ref contentBody, value); }
         }
 
         public override async void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> dictionary)
@@ -33,7 +33,7 @@ namespace SosowaReader.ViewModels
                 var service = new BrowserService();
                 Entry entry = new Entry();
                 entry = await service.LoadContentAsync(url);
-                Text = entry.Title;
+                ContentBody = entry.Content;
 
             }
         }
