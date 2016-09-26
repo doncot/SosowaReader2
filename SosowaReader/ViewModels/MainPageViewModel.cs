@@ -12,6 +12,9 @@ using Windows.UI.Core;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
 using System.Linq;
+using System;
+using System.Net.Http;
+using Windows.UI.Popups;
 
 namespace SosowaReader.ViewModels
 {
@@ -71,10 +74,18 @@ namespace SosowaReader.ViewModels
         /// <returns></returns>
         public async Task Load()
         {
-            var service = new BrowserService();
-            if(Entries == null || Entries.Count == 0)
+            try
             {
-                Entries = await service.LoadMainPageAsync();
+                var service = new BrowserService();
+                if (Entries == null || Entries.Count == 0)
+                {
+                    Entries = await service.LoadMainPageAsync();
+                }
+            }
+            catch(HttpRequestException ex)
+            {
+                var dialog = new MessageDialog(ex.Message, "通信エラーが発生しました");
+                await dialog.ShowAsync();
             }
         }
 
@@ -84,10 +95,18 @@ namespace SosowaReader.ViewModels
         /// <returns></returns>
         public async Task Refresh()
         {
-            var service = new BrowserService();
-            //ロード時に時間がかかるため、即開けておく
-            Entries = null;
-            Entries = await service.LoadMainPageAsync();
+            try
+            {
+                var service = new BrowserService();
+                //ロード時に時間がかかるため、即開けておく
+                Entries = null;
+                Entries = await service.LoadMainPageAsync();
+            }
+            catch (HttpRequestException ex)
+            {
+                var dialog = new MessageDialog(ex.Message, "通信エラーが発生しました");
+                await dialog.ShowAsync();
+            }
         }
 
         public void NavigateToContentPage()
