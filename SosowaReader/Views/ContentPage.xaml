@@ -9,11 +9,14 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Name="wrapper" Margin="20 16" HorizontalAlignment="Center">
-            <ScrollViewer>
+        <Grid Name="wrapper" HorizontalAlignment="Center">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <TextBlock Text="{Binding ContentBody, Mode=TwoWay}" 
-                           LineHeight="2.5"
-                           TextWrapping="Wrap"/>
+                           LineHeight="32"
+                           FontSize="18"
+                           FontFamily="Yu Gothic"
+                           TextWrapping="Wrap"
+                           Margin="32 12"/>
             </ScrollViewer>
         </Grid>
         <!--<WebView Source="http://coolier.dip.jp/sosowa/ssw_l/213/1474812077" />-->
