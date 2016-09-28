@@ -22,6 +22,13 @@ namespace SosowaReader.ViewModels
             set { SetProperty(ref contentBody, value); }
         }
 
+        private bool isLoading = false;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
         public override async void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> dictionary)
         {
             base.OnNavigatedTo(e, dictionary);
@@ -30,11 +37,14 @@ namespace SosowaReader.ViewModels
             if (!String.IsNullOrEmpty(url))
             {
                 //本文をロード
+                IsLoading = true;
+
                 var service = new BrowserService();
                 Entry entry = new Entry();
                 entry = await service.LoadContentAsync(url);
                 ContentBody = entry.Content;
 
+                IsLoading = false;
             }
         }
 

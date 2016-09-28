@@ -59,6 +59,13 @@ namespace SosowaReader.ViewModels
 
         public Entry SelectedEntry { get; set; }
 
+        private bool isLoading = false;
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
         private INavigationService NavigationService { get; }
 
         public MainPageViewModel(INavigationService navigationService)
@@ -75,6 +82,7 @@ namespace SosowaReader.ViewModels
         {
             try
             {
+                IsLoading = true;
                 var service = new BrowserService();
                 if (Entries == null || Entries.Count == 0)
                 {
@@ -86,6 +94,10 @@ namespace SosowaReader.ViewModels
                 var dialog = new MessageDialog(ex.Message, "通信エラーが発生しました");
                 await dialog.ShowAsync();
             }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         /// <summary>
@@ -96,6 +108,7 @@ namespace SosowaReader.ViewModels
         {
             try
             {
+                IsLoading = true;
                 var service = new BrowserService();
                 //ロード時に時間がかかるため、即開けておく
                 Entries = null;
@@ -105,6 +118,10 @@ namespace SosowaReader.ViewModels
             {
                 var dialog = new MessageDialog(ex.Message, "通信エラーが発生しました");
                 await dialog.ShowAsync();
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 

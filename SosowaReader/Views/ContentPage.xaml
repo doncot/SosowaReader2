@@ -9,6 +9,7 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ProgressRing Height="64" Width="64" IsActive="{Binding IsLoading}" />
         <Grid Name="wrapper" HorizontalAlignment="Center">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <TextBlock Text="{Binding ContentBody, Mode=TwoWay}" 

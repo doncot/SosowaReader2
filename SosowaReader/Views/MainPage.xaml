@@ -15,25 +15,29 @@
             <interactions:InvokeCommandAction Command="{Binding LoadedCommand}"/>
         </interactions:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ProgressRing Height="64" Width="64"
+            IsActive="{Binding IsLoading}"
+            VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <StackPanel>
 
-    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-        <Button Content="&#8635;" Command="{Binding RefreshCommand}"
-                Height="32" />
-        <ListView Name="EntriesList" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
-            <interactivity:Interaction.Behaviors>
-                <interactions:EventTriggerBehavior EventName="SelectionChanged">
-                    <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
-                </interactions:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Title}" Padding="8 0" />
-                        <TextBlock Text="{Binding Author}" Padding="8 0"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackPanel>
+            <Button Content="&#8635;" Command="{Binding RefreshCommand}"
+                    Height="32" />
+            <ListView Name="EntriesList" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
+                <interactivity:Interaction.Behaviors>
+                    <interactions:EventTriggerBehavior EventName="SelectionChanged">
+                        <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
+                    </interactions:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Title}" Padding="8 0" />
+                            <TextBlock Text="{Binding Author}" Padding="8 0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
 </Page>
