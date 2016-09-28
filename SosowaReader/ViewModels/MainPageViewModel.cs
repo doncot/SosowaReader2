@@ -58,7 +58,6 @@ namespace SosowaReader.ViewModels
         }
 
         public Entry SelectedEntry { get; set; }
-        public int Index { get; set; }
 
         private INavigationService NavigationService { get; }
 

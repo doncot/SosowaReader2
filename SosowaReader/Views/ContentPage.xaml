@@ -19,6 +19,5 @@
                            Margin="32 12"/>
             </ScrollViewer>
         </Grid>
-        <!--<WebView Source="http://coolier.dip.jp/sosowa/ssw_l/213/1474812077" />-->
     </Grid>
 </Page>

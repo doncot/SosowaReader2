@@ -36,14 +36,5 @@ namespace SosowaReader
 
             return base.OnInitializeAsync(args);
         }
-
-        /// <summary>
-        /// We use this method to simulate the loading of resources from different sources asynchronously.
-        /// </summary>
-        /// <returns></returns>
-        private Task LoadAppResources()
-        {
-            return Task.Delay(100);
-        }
     }
 }
