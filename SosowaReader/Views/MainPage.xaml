@@ -15,29 +15,48 @@
             <interactions:InvokeCommandAction Command="{Binding LoadedCommand}"/>
         </interactions:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ProgressRing Height="64" Width="64"
-            IsActive="{Binding IsLoading}"
-            VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <StackPanel>
-
-            <Button Content="&#8635;" Command="{Binding RefreshCommand}"
-                    Height="32" />
-            <ListView Name="EntriesList" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
-                <interactivity:Interaction.Behaviors>
-                    <interactions:EventTriggerBehavior EventName="SelectionChanged">
-                        <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
-                    </interactions:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Title}" Padding="8 0" />
-                            <TextBlock Text="{Binding Author}" Padding="8 0"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
-    </Grid>
+    <!--参考：https://blogs.msdn.microsoft.com/quick_thoughts/2015/06/01/windows-10-splitview-build-your-first-hamburger-menu/-->
+    <SplitView Name="HamburgerMenu" DisplayMode="CompactOverlay" IsPaneOpen="False"
+               CompactPaneLength="50" OpenPaneLength="150">
+        <SplitView.Pane>
+            <StackPanel Background="DarkGray">
+                <Button Name="HamburgerButton" Click="HamburgerButton_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Foreground="White" Background="Transparent" />
+                <Button Content="AAA" Width="50" Height="50"
+                        Foreground="White" Background="Transparent" />
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <ProgressRing Height="64" Width="64"
+                IsActive="{Binding IsLoading}"
+                VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="←"
+                            Margin="8 4" Height="32" Width="32" />
+                        <Button Content="&#8635;" Command="{Binding RefreshCommand}"
+                            Margin="8 4" Height="32" />
+                        <Button Content="→"
+                            Margin="8 4" Height="32" />
+                    </StackPanel>
+                    <ListView Name="EntriesList" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
+                        <interactivity:Interaction.Behaviors>
+                            <interactions:EventTriggerBehavior EventName="SelectionChanged">
+                                <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
+                            </interactions:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Title}" Padding="8 0" />
+                                    <TextBlock Text="{Binding Author}" Padding="8 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
 </Page>

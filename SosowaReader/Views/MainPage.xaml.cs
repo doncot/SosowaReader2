@@ -15,5 +15,10 @@ namespace SosowaReader.Views
         {
             this.InitializeComponent();
         }
+
+        private void HamburgerButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            HamburgerMenu.IsPaneOpen = !HamburgerMenu.IsPaneOpen;
+        }
     }
 }

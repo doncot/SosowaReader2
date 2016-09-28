@@ -10,9 +10,10 @@
     mc:Ignorable="d">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ProgressRing Height="64" Width="64" IsActive="{Binding IsLoading}" />
-        <Grid Name="wrapper" HorizontalAlignment="Center">
+        <Grid Name="wrapper" HorizontalAlignment="Stretch">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <TextBlock Text="{Binding ContentBody, Mode=TwoWay}" 
+                <TextBlock Text="{Binding ContentBody, Mode=TwoWay}"
+                           HorizontalAlignment="Center"
                            LineHeight="32"
                            FontSize="18"
                            FontFamily="Yu Gothic"
