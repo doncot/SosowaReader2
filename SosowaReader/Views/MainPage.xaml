@@ -19,11 +19,12 @@
     <SplitView Name="HamburgerMenu" DisplayMode="CompactOverlay" IsPaneOpen="False"
                CompactPaneLength="50" OpenPaneLength="150">
         <SplitView.Pane>
-            <StackPanel Background="DarkGray">
+            <StackPanel Background="Gray">
                 <Button Name="HamburgerButton" Click="HamburgerButton_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
-                    Width="50" Height="50" Foreground="White" Background="Transparent" />
+                        Width="50" Height="50"
+                        Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Background="Transparent" />
                 <Button Content="AAA" Width="50" Height="50"
-                        Foreground="White" Background="Transparent" />
+                        Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Background="Transparent" />
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
@@ -52,8 +53,9 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Title}" Padding="8 0" />
-                                    <TextBlock Text="{Binding Author}" Padding="8 0"/>
+                                    <TextBlock Text="{Binding Title}"
+                                               FontWeight="Bold" Padding="8 0" FontSize="18pt" />
+                                    <TextBlock Text="{Binding Author}" Padding="8 0" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

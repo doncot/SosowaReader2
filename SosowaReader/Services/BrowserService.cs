@@ -62,14 +62,15 @@ namespace SosowaReader.Services
                 //URL
                 var url = entry.Descendants("a").First().GetAttributeValue("href", "");
 
-
                 //作者
-
+                var name = entry.Descendants("td").Where(x => x.GetAttributeValue("class", "") == "name").Single()
+                    .Descendants("a").Single().InnerText;
 
                 //セット
                 results.Add(new Entry
                 {
                     Title = title,
+                    Author = name,
                     Url = url,
                 });
             }
