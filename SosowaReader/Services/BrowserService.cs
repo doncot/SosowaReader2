@@ -10,7 +10,8 @@ namespace SosowaReader.Services
 {
     public class SosowaBrowseService
     {
-        readonly String BaseUrl = "http://coolier.dip.jp/sosowa/ssw_l/";
+        private static readonly String BaseUrl = "http://coolier.dip.jp/sosowa/ssw_l/";
+        private static readonly DateTime UNIX_EPOCH = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         public async Task<int> GetActiveCollectionNo()
         {
@@ -66,12 +67,17 @@ namespace SosowaReader.Services
                 var name = entry.Descendants("td").Where(x => x.GetAttributeValue("class", "") == "name").Single()
                     .Descendants("a").Single().InnerText;
 
+                //日付
+                long unixTime = entry.Descendants("td").Where(x => x.GetAttributeValue("class", "") == "dateTime")
+                    .Single().GetAttributeValue("data-unixtime", 0);
+
                 //セット
                 results.Add(new Entry
                 {
                     Title = title,
                     Author = name,
                     Url = url,
+                    UploadDate = UNIX_EPOCH.AddSeconds(unixTime).ToLocalTime(),
                 });
             }
 

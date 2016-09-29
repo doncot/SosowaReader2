@@ -45,18 +45,24 @@
                             Margin="8 4" Height="32" />
                 </StackPanel>
                 <ListView Name="EntriesList" Grid.Row="1" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
-                        <interactivity:Interaction.Behaviors>
-                            <interactions:EventTriggerBehavior EventName="SelectionChanged">
-                                <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
-                            </interactions:EventTriggerBehavior>
-                        </interactivity:Interaction.Behaviors>
-                        <ListView.ItemTemplate>
+                    <interactivity:Interaction.Behaviors>
+                        <interactions:EventTriggerBehavior EventName="SelectionChanged">
+                            <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
+                        </interactions:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                    <!--<ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>-->
+                    <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Title}"
-                                               FontWeight="Bold" Padding="8 0" FontSize="18pt" />
+                                               FontWeight="Bold" Padding="8 0" FontSize="18pt" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding Author}" Padding="8 0" VerticalAlignment="Center"/>
-                                </StackPanel>
+                                    <TextBlock Text="{Binding UploadDate}" Padding="8 0" VerticalAlignment="Center"/>
+                            </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
