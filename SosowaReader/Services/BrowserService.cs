@@ -12,16 +12,30 @@ namespace SosowaReader.Services
     {
         readonly String BaseUrl = "http://coolier.dip.jp/sosowa/ssw_l/";
 
-        public async Task<List<Entry>> LoadCollectionAsync(int collectionNum = -1)
+        public async Task<int> GetActiveCollectionNo()
+        {
+            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            string htmlString = await (new HttpClient()).GetStringAsync(BaseUrl);
+            htmlDoc.LoadHtml(htmlString);
+
+            var idNode = htmlDoc.DocumentNode.Descendants("div")
+                .Where(x => x.GetAttributeValue("class", "") == "pagerContainer subjectPager").Single()
+                .Descendants("a")
+                .Where(x => x.GetAttributeValue("class", "") == "active");
+
+            return Int32.Parse(idNode.Single().InnerText);
+        }
+
+        public async Task<List<Entry>> LoadCollectionAsync(int collectionNo = -1)
         {
             Uri targetUrl;
-            if (collectionNum == -1)
+            if (collectionNo == -1)
             {
                 targetUrl = new Uri(BaseUrl);
             }
             else
             {
-                targetUrl = new Uri(new Uri(BaseUrl), collectionNum.ToString());
+                targetUrl = new Uri(new Uri(BaseUrl), collectionNo.ToString());
             }
 
             List<Entry> results = new List<Entry>();

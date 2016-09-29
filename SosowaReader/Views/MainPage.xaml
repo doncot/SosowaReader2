@@ -28,19 +28,22 @@
         </SplitView.Pane>
         <SplitView.Content>
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <ProgressRing Height="64" Width="64"
-                IsActive="{Binding IsLoading}"
-                VerticalAlignment="Center" HorizontalAlignment="Center" />
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="←"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <ProgressRing Grid.RowSpan="2" Height="64" Width="64"
+                    IsActive="{Binding IsLoading}"
+                    VerticalAlignment="Center" HorizontalAlignment="Center" />
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button Content="←" Command="{Binding GoToPreviousCollectionCommand}"
                             Margin="8 4" Height="32" Width="32" />
                         <Button Content="&#8635;" Command="{Binding RefreshCommand}"
                             Margin="8 4" Height="32" />
                         <Button Content="→"
                             Margin="8 4" Height="32" />
-                    </StackPanel>
-                    <ListView Name="EntriesList" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
+                </StackPanel>
+                <ListView Name="EntriesList" Grid.Row="1" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
                         <interactivity:Interaction.Behaviors>
                             <interactions:EventTriggerBehavior EventName="SelectionChanged">
                                 <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
@@ -55,7 +58,6 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </StackPanel>
             </Grid>
         </SplitView.Content>
     </SplitView>

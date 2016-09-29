@@ -49,14 +49,29 @@ namespace SosowaReader.ViewModels
             }
         }
 
-        public DelegateCommand GoToPreviousPage
+        public DelegateCommand GoToPreviousCollectionCommand
         {
             get
             {
                 return DelegateCommand.FromAsyncHandler(async () =>
                 {
-                    var browser = new SosowaBrowseService();
-                    await browser.LoadCollectionAsync();
+                    IsLoading = true;
+                    Entries = null;
+                    try
+                    {
+                        var browser = new SosowaBrowseService();
+                        var id = await browser.GetActiveCollectionNo();
+                        Entries = await browser.LoadCollectionAsync(id - 1);
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        var dialog = new MessageDialog(ex.Message, "通信エラーが発生しました");
+                        await dialog.ShowAsync();
+                    }
+                    finally
+                    {
+                        IsLoading = false;
+                    }
                 });
             }
         }
