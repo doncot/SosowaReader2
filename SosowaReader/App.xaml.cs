@@ -25,6 +25,13 @@ namespace SosowaReader
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                //this.DebugSettings.IsTextPerformanceVisualizationEnabled = true;
+            }
+#endif
+
             NavigationService.Navigate("Main", null);
 
             return Task.FromResult<object>(null);

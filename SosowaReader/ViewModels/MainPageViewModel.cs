@@ -49,6 +49,18 @@ namespace SosowaReader.ViewModels
             }
         }
 
+        public DelegateCommand GoToPreviousPage
+        {
+            get
+            {
+                return DelegateCommand.FromAsyncHandler(async () =>
+                {
+                    var browser = new SosowaBrowseService();
+                    await browser.LoadCollectionAsync();
+                });
+            }
+        }
+
         private List<Entry> entries;
         [RestorableState]
         public List<Entry> Entries
@@ -83,10 +95,10 @@ namespace SosowaReader.ViewModels
             try
             {
                 IsLoading = true;
-                var service = new BrowserService();
+                var service = new SosowaBrowseService();
                 if (Entries == null || Entries.Count == 0)
                 {
-                    Entries = await service.LoadMainPageAsync();
+                    Entries = await service.LoadCollectionAsync();
                 }
             }
             catch(HttpRequestException ex)
@@ -109,10 +121,10 @@ namespace SosowaReader.ViewModels
             try
             {
                 IsLoading = true;
-                var service = new BrowserService();
+                var service = new SosowaBrowseService();
                 //ロード時に時間がかかるため、即開けておく
                 Entries = null;
-                Entries = await service.LoadMainPageAsync();
+                Entries = await service.LoadCollectionAsync();
             }
             catch (HttpRequestException ex)
             {

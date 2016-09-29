@@ -8,16 +8,26 @@ using System.Net.Http;
 
 namespace SosowaReader.Services
 {
-    public class BrowserService
+    public class SosowaBrowseService
     {
-        readonly String MainPageUrl = "http://coolier.dip.jp/sosowa/ssw_l/";
+        readonly String BaseUrl = "http://coolier.dip.jp/sosowa/ssw_l/";
 
-        public async Task<List<Entry>> LoadMainPageAsync()
+        public async Task<List<Entry>> LoadCollectionAsync(int collectionNum = -1)
         {
+            Uri targetUrl;
+            if (collectionNum == -1)
+            {
+                targetUrl = new Uri(BaseUrl);
+            }
+            else
+            {
+                targetUrl = new Uri(new Uri(BaseUrl), collectionNum.ToString());
+            }
+
             List<Entry> results = new List<Entry>();
 
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            string htmlString = await (new HttpClient()).GetStringAsync(MainPageUrl);
+            string htmlString = await (new HttpClient()).GetStringAsync(targetUrl);
             htmlDoc.LoadHtml(htmlString);
 
             var entries = htmlDoc.DocumentNode.Descendants("section")
@@ -55,7 +65,7 @@ namespace SosowaReader.Services
 
         public async Task<Entry> LoadContentAsync(String url)
         {
-            var contentUri = new Uri(new Uri(MainPageUrl), url);
+            var contentUri = new Uri(new Uri(BaseUrl), url);
 
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             string htmlString = await(new HttpClient()).GetStringAsync(contentUri);
@@ -78,6 +88,16 @@ namespace SosowaReader.Services
                 Title = titleNode.InnerText,
                 Content = convertedContent,
             };
+        }
+
+        private async Task<bool> PageExists(String url)
+        {
+            using (var client = new HttpClient())
+            {
+                var httpRequestMsg = new HttpRequestMessage(HttpMethod.Head, url);
+                var response = await client.SendAsync(httpRequestMsg);
+                return response.IsSuccessStatusCode;
+            }
         }
     }
 }

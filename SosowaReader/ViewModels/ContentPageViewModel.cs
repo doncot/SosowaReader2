@@ -39,7 +39,7 @@ namespace SosowaReader.ViewModels
                 //本文をロード
                 IsLoading = true;
 
-                var service = new BrowserService();
+                var service = new SosowaBrowseService();
                 Entry entry = new Entry();
                 entry = await service.LoadContentAsync(url);
                 ContentBody = entry.Content;
