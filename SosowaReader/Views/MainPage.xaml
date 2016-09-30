@@ -8,8 +8,12 @@
     xmlns:prism="using:Prism.Windows.Mvvm"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:converter="using:SosowaReader.Converters"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
+    <Page.Resources>
+        <converter:DateTimeDisplayConverter x:Key="DateTimeDisplayConverter" />
+    </Page.Resources>
     <interactivity:Interaction.Behaviors>
         <interactions:EventTriggerBehavior EventName="Loaded">
             <interactions:InvokeCommandAction Command="{Binding LoadedCommand}"/>
@@ -61,7 +65,7 @@
                                     <TextBlock Text="{Binding Title}"
                                                FontWeight="Bold" Padding="8 0" FontSize="18pt" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding Author}" Padding="8 0" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding UploadDate}" Padding="8 0" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding UploadDate, Converter={StaticResource DateTimeDisplayConverter}}" Padding="8 0" VerticalAlignment="Center"/>
                             </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
