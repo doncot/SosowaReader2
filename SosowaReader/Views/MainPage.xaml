@@ -68,6 +68,7 @@
                                                 FontWeight="Bold" Padding="8 0" FontSize="18pt" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding Author}" Padding="8 0" VerticalAlignment="Center"/>
                                     <TextBlock Text="{Binding UploadDate, Converter={StaticResource DateTimeDisplayConverter}}" Padding="8 0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Points}" Padding="8 0" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

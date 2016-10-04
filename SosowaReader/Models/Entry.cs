@@ -21,6 +21,8 @@ namespace SosowaReader.Models
 
         public int Size { get; set; }
 
+        public int Points { get; set; }
+
         public String Summary { get; set; }
         
         public String Url { get; set; }

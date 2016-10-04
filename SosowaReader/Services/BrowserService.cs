@@ -71,6 +71,9 @@ namespace SosowaReader.Services
                 long unixTime = entry.Descendants("td").Where(x => x.GetAttributeValue("class", "") == "dateTime")
                     .Single().GetAttributeValue("data-unixtime", 0);
 
+                //ポイント
+                var points = entry.Descendants("td").Where(x => x.GetAttributeValue("class", "") == "info points").Single().InnerText;
+
                 //セット
                 results.Add(new Entry
                 {
@@ -78,6 +81,7 @@ namespace SosowaReader.Services
                     Author = name,
                     Url = url,
                     UploadDate = UNIX_EPOCH.AddSeconds(unixTime).ToLocalTime(),
+                    Points = Int32.Parse(points),
                 });
             }
 
