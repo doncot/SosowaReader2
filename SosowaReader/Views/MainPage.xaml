@@ -43,10 +43,11 @@
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Button Content="←" Command="{Binding GoToPreviousCollectionCommand}"
                             Margin="8 4" Height="32" Width="32" />
-                        <Button Content="&#8635;" Command="{Binding RefreshCommand}"
-                            Margin="8 4" Height="32" />
-                        <Button Content="→"
-                            Margin="8 4" Height="32" />
+                    <Button Content="&#8635;" Command="{Binding RefreshCommand}"
+                        Margin="8 4" Height="32" />
+                    <Button Content="→"
+                        Margin="8 4" Height="32" />
+                    <AutoSuggestBox PlaceholderText="この作品集から検索" QueryIcon="Find" Width="230" />
                 </StackPanel>
                 <ListView Name="EntriesList" Grid.Row="1" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
@@ -60,14 +61,16 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>-->
                     <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
+                        <DataTemplate>
+                            <Border>
+                                <StackPanel BorderBrush="DarkRed" BorderThickness="1" Orientation="Horizontal">
                                     <TextBlock Text="{Binding Title}"
-                                               FontWeight="Bold" Padding="8 0" FontSize="18pt" VerticalAlignment="Center" />
+                                                FontWeight="Bold" Padding="8 0" FontSize="18pt" VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding Author}" Padding="8 0" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding UploadDate, Converter={StaticResource DateTimeDisplayConverter}}" Padding="8 0" VerticalAlignment="Center"/>
-                            </StackPanel>
-                            </DataTemplate>
+                                    <TextBlock Text="{Binding UploadDate, Converter={StaticResource DateTimeDisplayConverter}}" Padding="8 0" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
             </Grid>
