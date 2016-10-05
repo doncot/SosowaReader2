@@ -60,6 +60,11 @@
                             <ItemsWrapGrid Orientation="Vertical"/>
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>-->
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid BorderBrush="DarkRed" BorderThickness="1">
