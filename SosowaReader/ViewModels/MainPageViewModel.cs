@@ -20,6 +20,7 @@ namespace SosowaReader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+#region Command
         private DelegateCommand selectionChangedCommand;
         public DelegateCommand SelectionChangedCommand
         {
@@ -76,15 +77,37 @@ namespace SosowaReader.ViewModels
             }
         }
 
-        private List<Entry> entries;
+        public DelegateCommand TextChangeSearch
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    Entries = Entries.Where(x => x.Title.Contains(searchText) 
+                        || x.Author.Contains(searchText));
+                });
+            }
+        }
+
+#endregion Command
+
+        private IEnumerable<Entry> entries;
         [RestorableState]
-        public List<Entry> Entries
+        public IEnumerable<Entry> Entries
         {
             get { return entries; }
             set { SetProperty(ref entries, value); }
         }
 
         public Entry SelectedEntry { get; set; }
+
+        private string searchText = String.Empty;
+        [RestorableState]
+        public string SearchText
+        {
+            get { return searchText; }
+            set { SetProperty(ref searchText, value); }
+        }
 
         private bool isLoading = false;
         public bool IsLoading
@@ -93,6 +116,8 @@ namespace SosowaReader.ViewModels
             set { SetProperty(ref isLoading, value); }
         }
 
+
+
         private INavigationService NavigationService { get; }
 
         public MainPageViewModel(INavigationService navigationService)
@@ -100,6 +125,7 @@ namespace SosowaReader.ViewModels
             this.NavigationService = navigationService;
             //ContentPageNavigateCommand = new DelegateCommand(() => navigationService.Navigate("Content", null));
         }
+
 
         /// <summary>
         /// データをロードする。（既データがある場合スルーされる）
@@ -111,7 +137,7 @@ namespace SosowaReader.ViewModels
             {
                 IsLoading = true;
                 var service = new SosowaBrowseService();
-                if (Entries == null || Entries.Count == 0)
+                if (Entries == null)
                 {
                     Entries = await service.LoadCollectionAsync();
                 }
