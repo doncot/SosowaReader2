@@ -49,7 +49,7 @@
                         Margin="8 4" Height="32" />
                     <AutoSuggestBox PlaceholderText="この作品集から検索" QueryIcon="Find" Width="230" />
                 </StackPanel>
-                <ListView Name="EntriesList" Grid.Row="1" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}">
+                <ListView Grid.Row="1" Name="EntriesList" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}" HorizontalAlignment="Stretch">
                     <interactivity:Interaction.Behaviors>
                         <interactions:EventTriggerBehavior EventName="SelectionChanged">
                             <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
@@ -62,18 +62,22 @@
                     </ListView.ItemsPanel>-->
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border>
-                                <StackPanel BorderBrush="DarkRed" BorderThickness="1" Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Title}"
-                                                FontWeight="Bold" Padding="8 0" FontSize="18pt" VerticalAlignment="Center" />
-                                    <TextBlock Text="{Binding Author}" Padding="8 0" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding UploadDate, Converter={StaticResource DateTimeDisplayConverter}}" Padding="8 0" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding Points}" Padding="8 0" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </Border>
+                            <Grid BorderBrush="DarkRed" BorderThickness="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4*" />
+                                    <ColumnDefinition Width="0.1*" />
+                                    <ColumnDefinition Width="0.1*" />
+                                    <ColumnDefinition Width="0.1*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Title}"
+                                            FontWeight="Bold" Padding="8 0" FontSize="18pt" VerticalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Text="{Binding Author}" Padding="8 0" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="2" Text="{Binding UploadDate, Converter={StaticResource DateTimeDisplayConverter}}" Padding="8 0" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Column="3" Text="{Binding Points}" Padding="8 0" VerticalAlignment="Center"/>
+                            </Grid>
                         </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
         </SplitView.Content>
     </SplitView>
