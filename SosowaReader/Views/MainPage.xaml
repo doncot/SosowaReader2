@@ -47,9 +47,15 @@
                         Margin="8 4" Height="32" />
                     <Button Content="→"
                         Margin="8 4" Height="32" />
-                    <AutoSuggestBox PlaceholderText="この作品集から検索" QueryIcon="Find" Width="230" />
+                    <AutoSuggestBox Text="{Binding SearchText,Mode=TwoWay}" PlaceholderText="この作品集から検索" QueryIcon="Find" Width="230" >
+                        <interactivity:Interaction.Behaviors>
+                            <interactions:EventTriggerBehavior EventName="TextChanged">
+                                <interactions:InvokeCommandAction Command="{Binding TextChangeSearch}"/>
+                            </interactions:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                    </AutoSuggestBox>
                 </StackPanel>
-                <ListView Grid.Row="1" Name="EntriesList" ItemsSource="{Binding Entries}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}" HorizontalAlignment="Stretch">
+                <ListView Grid.Row="1" Name="EntriesList" ItemsSource="{Binding Entries, Mode=TwoWay}" SelectionMode="Single" SelectedItem="{Binding SelectedEntry, Mode=TwoWay}" HorizontalAlignment="Stretch">
                     <interactivity:Interaction.Behaviors>
                         <interactions:EventTriggerBehavior EventName="SelectionChanged">
                             <interactions:InvokeCommandAction Command="{Binding SelectionChangedCommand}"/>
