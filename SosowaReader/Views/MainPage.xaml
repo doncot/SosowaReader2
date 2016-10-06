@@ -73,7 +73,7 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid BorderBrush="DarkRed" BorderThickness="1">
+                            <Grid BorderBrush="DarkRed" BorderThickness="1" Padding="4">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.4*" />
                                     <ColumnDefinition Width="0.1*" />
