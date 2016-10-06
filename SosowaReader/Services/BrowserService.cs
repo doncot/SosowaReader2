@@ -59,7 +59,7 @@ namespace SosowaReader.Services
             foreach (var entry in entries)
             {
                 //タイトル
-                var title = entry.Descendants("a").First().InnerText;
+                var title = System.Net.WebUtility.HtmlDecode(entry.Descendants("a").First().InnerText);
                 //URL
                 var url = entry.Descendants("a").First().GetAttributeValue("href", "");
 
