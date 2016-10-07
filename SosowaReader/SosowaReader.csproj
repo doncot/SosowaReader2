@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Converters\DateTimeDisplayConverter.cs" />
     <Compile Include="Models\Entry.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Services\BrowserService.cs" />
     <Compile Include="ViewModels\ContentPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

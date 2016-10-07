@@ -17,8 +17,6 @@ namespace SosowaReader.Models
         /// </summary>
         public DateTime UploadDate { get; set; }
 
-        public List<String> Tags { get; set; }
-
         public int Size { get; set; }
 
         public int Points { get; set; }
@@ -26,6 +24,8 @@ namespace SosowaReader.Models
         public String Summary { get; set; }
         
         public String Url { get; set; }
+
+        public List<Tag> Tags { get; set; }
 
         /// <summary>
         /// 本文
