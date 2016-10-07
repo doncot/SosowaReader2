@@ -74,6 +74,16 @@ namespace SosowaReader.Services
                 //ポイント
                 var points = entry.Descendants("td").Where(x => x.GetAttributeValue("class", "") == "info points").Single().InnerText;
 
+                //タグ
+                var tags = new List<Tag>();
+                var tagListNodes = entry.NextSibling.Descendants("li");
+                foreach(var tagListNode in tagListNodes)
+                {
+                    var tagNode = tagListNode.Descendants("a").Single();
+                    var newTag = new Tag { Name = tagNode.InnerText, Url = tagNode.GetAttributeValue("href", "") };
+                    tags.Add(newTag);
+                }
+
                 //セット
                 results.Add(new Entry
                 {
@@ -82,6 +92,7 @@ namespace SosowaReader.Services
                     Url = url,
                     UploadDate = UNIX_EPOCH.AddSeconds(unixTime).ToLocalTime(),
                     Points = Int32.Parse(points),
+                    Tags = tags,
                 });
             }
 
