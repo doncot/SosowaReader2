@@ -64,7 +64,30 @@
                     </AutoSuggestBox>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="並び替え:" />
-                        <Button Content="タイトル" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Background="Transparent">
+                        <!--<Button Content="タイトル" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Background="Transparent">-->
+                        <Button>
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Grid>
+                                        <TextBlock Name="SortHeader" Text="TEST" Foreground="{ThemeResource SystemControlHighlightAccentBrush}" />
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal"/>
+                                                <VisualState x:Name="PointerOver">
+                                                    <Storyboard>
+                                                        <ColorAnimation Duration="0" To="{ThemeResource SystemBaseHighColor}" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="SortHeader" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <Storyboard>
+                                                        <ColorAnimation Duration="0" To="{ThemeResource SystemBaseLowColor}" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="SortHeader" />
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
                             <Button.Flyout>
                                 <MenuFlyout Placement="Top" >
                                     <MenuFlyoutItem Text="タイトル" />
@@ -76,6 +99,7 @@
                                     </MenuFlyoutSubItem>
                                 </MenuFlyout>
                             </Button.Flyout>
+                        <!--</Button>-->
                         </Button>
                     </StackPanel>
                 </StackPanel>
