@@ -15,6 +15,7 @@ using System.Linq;
 using System;
 using System.Net.Http;
 using Windows.UI.Popups;
+using SosowaReader.Enums;
 
 namespace SosowaReader.ViewModels
 {
@@ -116,7 +117,12 @@ namespace SosowaReader.ViewModels
             set { SetProperty(ref isLoading, value); }
         }
 
-
+        private SortEnum sortType;
+        public SortEnum SortType
+        {
+            get { return sortType; }
+            set { SetProperty(ref sortType, value); }
+        }
 
         private INavigationService NavigationService { get; }
 
