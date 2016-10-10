@@ -97,7 +97,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\SortTypeConverter.cs" />
     <Compile Include="Converters\DateTimeDisplayConverter.cs" />
+    <Compile Include="Enums\SortEnum.cs" />
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Services\BrowserService.cs" />

@@ -13,6 +13,7 @@
     mc:Ignorable="d">
     <Page.Resources>
         <converter:DateTimeDisplayConverter x:Key="DateTimeDisplayConverter" />
+        <converter:SortTypeConverter x:Key="SortTypeConverter" />
     </Page.Resources>
     <interactivity:Interaction.Behaviors>
         <interactions:EventTriggerBehavior EventName="Loaded">
@@ -69,7 +70,7 @@
                             <Button.Template>
                                 <ControlTemplate>
                                     <Grid>
-                                        <TextBlock Name="SortHeader" Text="TEST" Foreground="{ThemeResource SystemControlHighlightAccentBrush}" />
+                                        <TextBlock Name="SortHeader" Text="{Binding SortType,Mode=TwoWay,Converter={StaticResource SortTypeConverter}}" Foreground="{ThemeResource SystemControlHighlightAccentBrush}" />
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal"/>
