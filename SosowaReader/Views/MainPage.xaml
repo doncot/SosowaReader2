@@ -70,7 +70,7 @@
                             <Button.Template>
                                 <ControlTemplate>
                                     <Grid>
-                                        <TextBlock Name="SortHeader" Text="{Binding SortType,Mode=TwoWay,Converter={StaticResource SortTypeConverter}}" Foreground="{ThemeResource SystemControlHighlightAccentBrush}" />
+                                        <TextBlock Name="SortHeader" Text="{Binding SortType,Converter={StaticResource SortTypeConverter}}" Foreground="{ThemeResource SystemControlHighlightAccentBrush}" />
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal"/>
