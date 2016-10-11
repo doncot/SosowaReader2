@@ -20,7 +20,7 @@ namespace SosowaReader.Converters
                     return "タイトル";
 
                 case SortEnum.Author:
-                    return "著者";
+                    return "名前";
 
                 case SortEnum.Point:
                     return "POINT";
