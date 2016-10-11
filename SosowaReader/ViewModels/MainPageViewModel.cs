@@ -21,7 +21,7 @@ namespace SosowaReader.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-#region Command
+#region Commands
         private DelegateCommand selectionChangedCommand;
         public DelegateCommand SelectionChangedCommand
         {
@@ -78,7 +78,7 @@ namespace SosowaReader.ViewModels
             }
         }
 
-        public DelegateCommand TextChangeSearch
+        public DelegateCommand TextChangeSearchCommand
         {
             get
             {
@@ -90,7 +90,18 @@ namespace SosowaReader.ViewModels
             }
         }
 
-#endregion Command
+        public DelegateCommand<String> SortTypeChangeCommand
+        {
+            get
+            {
+                return new DelegateCommand<String>((String rawtype) =>
+                {
+                    SortType = (SortEnum) Enum.Parse(typeof(SortEnum), rawtype);
+                });
+            }
+        }
+
+#endregion Commands
 
         private IEnumerable<Entry> entries;
         [RestorableState]

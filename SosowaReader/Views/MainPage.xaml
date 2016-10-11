@@ -59,7 +59,7 @@
                     <AutoSuggestBox Text="{Binding SearchText,Mode=TwoWay}" PlaceholderText="この作品集から検索" QueryIcon="Find" Width="230" >
                         <interactivity:Interaction.Behaviors>
                             <interactions:EventTriggerBehavior EventName="TextChanged">
-                                <interactions:InvokeCommandAction Command="{Binding TextChangeSearch}"/>
+                                <interactions:InvokeCommandAction Command="{Binding TextChangeSearchCommand}"/>
                             </interactions:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
                     </AutoSuggestBox>
@@ -91,12 +91,13 @@
                             </Button.Template>
                             <Button.Flyout>
                                 <MenuFlyout Placement="Top" >
-                                    <MenuFlyoutItem Text="タイトル" />
-                                    <MenuFlyoutItem Text="POINT" />
+                                    <MenuFlyoutItem Text="タイトル" Command="{Binding SortTypeChangeCommand}" CommandParameter="Title" />
+                                    <MenuFlyoutItem Text="名前" Command="{Binding SortTypeChangeCommand}" CommandParameter="Author" />
+                                    <MenuFlyoutItem Text="POINT" Command="{Binding SortTypeChangeCommand}" CommandParameter="Point" />
                                     <MenuFlyoutSeparator />
                                     <MenuFlyoutSubItem Text="並び順">
-                                        <MenuFlyoutItem Text="降順" />
-                                        <MenuFlyoutItem Text="昇順" />
+                                        <ToggleMenuFlyoutItem  Text="降順" IsChecked="True" />
+                                        <ToggleMenuFlyoutItem  Text="昇順" />
                                     </MenuFlyoutSubItem>
                                 </MenuFlyout>
                             </Button.Flyout>
