@@ -85,7 +85,9 @@ namespace SosowaReader.ViewModels
                 return new DelegateCommand(() =>
                 {
                     Entries = Entries.Where(x => x.Title.Contains(searchText) 
-                        || x.Author.Contains(searchText));
+                        || x.Author.Contains(searchText) || x.Tags.Any(y=>y.Name.Contains(searchText)));
+
+                    
                 });
             }
         }
