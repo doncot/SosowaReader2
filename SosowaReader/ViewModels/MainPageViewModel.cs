@@ -96,7 +96,23 @@ namespace SosowaReader.ViewModels
             {
                 return new DelegateCommand<String>((String rawtype) =>
                 {
+                    //表示
                     SortType = (SortEnum) Enum.Parse(typeof(SortEnum), rawtype);
+
+                    switch(SortType)
+                    {
+                        case SortEnum.Title:
+                            Entries = Entries.OrderBy(x => x.Title);
+                            break;
+
+                        case SortEnum.Author:
+                            Entries = Entries.OrderBy(x => x.Author);
+                            break;
+
+                        case SortEnum.Point:
+                            Entries = Entries.OrderBy(x => x.Points);
+                            break;
+                    }
                 });
             }
         }
