@@ -22,6 +22,9 @@ namespace SosowaReader.Converters
                 case SortEnum.Author:
                     return "名前";
 
+                case SortEnum.UploadDate:
+                    return "投稿時間";
+                    
                 case SortEnum.Point:
                     return "POINT";
 

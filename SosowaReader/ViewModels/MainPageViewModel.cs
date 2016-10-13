@@ -111,8 +111,12 @@ namespace SosowaReader.ViewModels
                             Entries = Entries.OrderBy(x => x.Author);
                             break;
 
+                        case SortEnum.UploadDate:
+                            Entries = Entries.OrderByDescending(x => x.UploadDate);
+                            break;
+
                         case SortEnum.Point:
-                            Entries = Entries.OrderBy(x => x.Points);
+                            Entries = Entries.OrderByDescending(x => x.Points);
                             break;
                     }
                 });

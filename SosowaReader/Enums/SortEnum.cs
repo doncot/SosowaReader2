@@ -10,6 +10,7 @@ namespace SosowaReader.Enums
     {
         Title,
         Author,
+        UploadDate,
         Point,
     }
 }
