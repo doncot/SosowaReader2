@@ -93,10 +93,11 @@
                                 <MenuFlyout Placement="Top" >
                                     <MenuFlyoutItem Text="タイトル" Command="{Binding SortTypeChangeCommand}" CommandParameter="Title" />
                                     <MenuFlyoutItem Text="名前" Command="{Binding SortTypeChangeCommand}" CommandParameter="Author" />
+                                    <MenuFlyoutItem Text="投稿時間" Command="{Binding SortTypeChangeCommand}" CommandParameter="UploadDate" />
                                     <MenuFlyoutItem Text="POINT" Command="{Binding SortTypeChangeCommand}" CommandParameter="Point" />
                                     <MenuFlyoutSeparator />
                                     <MenuFlyoutSubItem Text="並び順">
-                                        <ToggleMenuFlyoutItem  Text="降順" IsChecked="True" />
+                                        <ToggleMenuFlyoutItem  Text="降順" IsChecked="True"  />
                                         <ToggleMenuFlyoutItem  Text="昇順" />
                                     </MenuFlyoutSubItem>
                                 </MenuFlyout>
