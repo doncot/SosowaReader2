@@ -167,6 +167,7 @@ namespace SosowaReader.ViewModels
         }
 
         private SortEnum sortType;
+        [RestorableState]
         public SortEnum SortType
         {
             get { return sortType; }
@@ -197,11 +198,12 @@ namespace SosowaReader.ViewModels
                     Entries = await service.LoadCollectionAsync();
                 }
             }
-            catch(HttpRequestException ex)
+            catch (HttpRequestException ex)
             {
                 var dialog = new MessageDialog(ex.Message, "通信エラーが発生しました");
                 await dialog.ShowAsync();
             }
+
             catch (InvalidOperationException ex)
             {
                 var dialog = new MessageDialog(ex.Message, "データ展開中に問題が発生しました。");
@@ -230,6 +232,11 @@ namespace SosowaReader.ViewModels
             catch (HttpRequestException ex)
             {
                 var dialog = new MessageDialog(ex.Message, "通信エラーが発生しました");
+                await dialog.ShowAsync();
+            }
+            catch (InvalidOperationException ex)
+            {
+                var dialog = new MessageDialog(ex.Message, "データ展開中に問題が発生しました。");
                 await dialog.ShowAsync();
             }
             finally

@@ -100,7 +100,7 @@
     <Compile Include="Converters\SortTypeConverter.cs" />
     <Compile Include="Converters\DateTimeDisplayConverter.cs" />
     <Compile Include="Enums\SortEnum.cs" />
-    <Compile Include="HamburgerMenuControl.xaml.cs">
+    <Compile Include="Controllers\HamburgerMenuControl.xaml.cs">
       <DependentUpon>HamburgerMenuControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Entry.cs" />
@@ -140,7 +140,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="HamburgerMenuControl.xaml">
+    <Page Include="Controllers\HamburgerMenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,6 +157,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

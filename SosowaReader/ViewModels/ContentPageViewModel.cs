@@ -1,13 +1,7 @@
-﻿using Prism.Windows.AppModel;
-using Prism.Windows.Mvvm;
+﻿using Prism.Windows.Mvvm;
 using Prism.Windows.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Storage;
-using System.Reflection;
 using SosowaReader.Models;
 using SosowaReader.Services;
 
@@ -40,7 +34,7 @@ namespace SosowaReader.ViewModels
                 IsLoading = true;
 
                 var service = new SosowaBrowseService();
-                Entry entry = new Entry();
+                var entry = new Entry();
                 entry = await service.LoadContentAsync(url);
                 ContentBody = entry.Content;
 
