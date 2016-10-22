@@ -51,6 +51,17 @@ namespace SosowaReader.ViewModels
             }
         }
 
+        public DelegateCommand GoToSearchPageCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    NavigationService.Navigate("Search", null);
+                });
+            }
+        }
+
         public DelegateCommand GoToPreviousCollectionCommand
         {
             get
