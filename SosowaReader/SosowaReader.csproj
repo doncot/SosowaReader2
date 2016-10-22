@@ -104,6 +104,7 @@
       <DependentUpon>HamburgerMenuControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Entry.cs" />
+    <Compile Include="Models\EntryQuery.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Services\BrowserService.cs" />
     <Compile Include="ViewModels\ContentPageViewModel.cs" />

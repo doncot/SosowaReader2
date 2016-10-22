@@ -81,14 +81,16 @@ namespace SosowaReader.Services
             };
         }
 
-        public async Task<List<Entry>> SearchEntries()
+        public async Task<List<Entry>> SearchEntriesAsync(EntryQuery query)
         {
             //Build query
-            string query = "search?query=&tags=鈴仙";
+            string queryString = "search?query=";
+            //タグ
+            queryString += "&tags=" + query.Tags;
 
-            var contentUri = new Uri(new Uri(BaseUrl), query);
+            var contentUri = new Uri(new Uri(BaseUrl), queryString);
 
-            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            var htmlDoc = new HtmlDocument();
             string htmlString = await (new HttpClient()).GetStringAsync(contentUri);
             htmlDoc.LoadHtml(htmlString);
 
