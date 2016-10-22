@@ -2,7 +2,8 @@
     x:Class="SosowaReader.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SosowaReader.Views"
+    xmlns:local="using:SosowaReader"
+    xmlns:v="using:SosowaReader.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="using:Prism.Windows.Mvvm"
@@ -21,24 +22,9 @@
         </interactions:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
     <!--参考：https://blogs.msdn.microsoft.com/quick_thoughts/2015/06/01/windows-10-splitview-build-your-first-hamburger-menu/-->
-    <SplitView Name="HamburgerMenu" DisplayMode="CompactOverlay" IsPaneOpen="False"
-               CompactPaneLength="50" OpenPaneLength="150">
+    <SplitView Name="HamburgerMenu" DisplayMode="CompactOverlay" CompactPaneLength="50" OpenPaneLength="150">
         <SplitView.Pane>
-            <Grid Background="Gray">
-                <StackPanel Background="Gray" VerticalAlignment="Top">
-                    <Button Name="HamburgerButton" Click="HamburgerButton_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
-                            Width="50" Height="50"
-                            Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Background="Transparent" />
-                    <Button Content="AAA" Width="50" Height="50"
-                            Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Background="Transparent" />
-                </StackPanel>
-                <StackPanel Background="Gray" VerticalAlignment="Bottom">
-                    <Button Content="&#xE721;" Width="50" Height="50" FontFamily="Segoe MDL2 Assets"
-                            Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Background="Transparent" />
-                    <Button Content="&#xE713;" Width="50" Height="50" FontFamily="Segoe MDL2 Assets"
-                            Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Background="Transparent" />
-                </StackPanel>
-            </Grid>
+            <local:HamburgerMenuControl IsMenuOpen="{Binding ElementName=HamburgerMenu,Path=IsPaneOpen,Mode=TwoWay}" />
         </SplitView.Pane>
         <SplitView.Content>
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -140,8 +126,6 @@
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Author}" Padding="8 0" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding UploadDate, Converter={StaticResource DateTimeDisplayConverter}}" Padding="8 0" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Points}" Padding="8 0" VerticalAlignment="Center"/>
-
-
                                 <ListView Grid.Row="1" ItemsSource="{Binding Tags}"
                                           ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                           ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled">
