@@ -12,7 +12,23 @@
         </SplitView.Pane>
         <SplitView.Content>
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+                <StackPanel>
+                    <AutoSuggestBox Text="{Binding SearchText,Mode=TwoWay}" Header="検索文字列" Width="400" />
+                    <AutoSuggestBox Text="{Binding SearchText,Mode=TwoWay}" Header="作者" Width="400" />
+                    <Grid Width="400">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.4*" />
+                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.4*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Header="評価数" />
+                        <TextBlock Grid.Column="1" Text="～" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                        <TextBox Grid.Column="2" Header=" " />
+                    </Grid>
+                    <AutoSuggestBox Text="{Binding SearchText,Mode=TwoWay}" Header="作品名" Width="400" />
+                    <AutoSuggestBox Text="{Binding SearchText,Mode=TwoWay}" Header="タグ" Width="400" />
+                    <!--<TextBox Header="タグ" Text="" Width="300" Height="148" VerticalAlignment="Top" />-->
+                </StackPanel>
             </Grid>
         </SplitView.Content>
     </SplitView>
