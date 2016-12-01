@@ -51,7 +51,6 @@
                     </AutoSuggestBox>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="並び替え:" VerticalAlignment="Center" Margin="0 0 6 0" />
-                        <!--<Button Content="タイトル" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Background="Transparent">-->
                         <Button>
                             <Button.Template>
                                 <ControlTemplate>
@@ -88,7 +87,6 @@
                                     </MenuFlyoutSubItem>
                                 </MenuFlyout>
                             </Button.Flyout>
-                        <!--</Button>-->
                         </Button>
                     </StackPanel>
                 </StackPanel>

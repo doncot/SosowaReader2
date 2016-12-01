@@ -5,12 +5,7 @@ using Prism.Windows.Navigation;
 using SosowaReader.Models;
 using SosowaReader.Services;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Background;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Navigation;
-using System.Reflection;
 using System.Linq;
 using System;
 using System.Net.Http;
@@ -90,6 +85,9 @@ namespace SosowaReader.ViewModels
                     {
                         IsLoading = false;
                     }
+
+                    //選択された並び替えを元に変更
+                    ChangeSortType(SortType);
                 });
             }
         }
@@ -110,33 +108,7 @@ namespace SosowaReader.ViewModels
 
         public DelegateCommand<String> SortTypeChangeCommand
         {
-            get
-            {
-                return new DelegateCommand<String>((String rawtype) =>
-                {
-                    //表示
-                    SortType = (SortEnum) Enum.Parse(typeof(SortEnum), rawtype);
-
-                    switch(SortType)
-                    {
-                        case SortEnum.Title:
-                            Entries = Entries.OrderBy(x => x.Title);
-                            break;
-
-                        case SortEnum.Author:
-                            Entries = Entries.OrderBy(x => x.Author);
-                            break;
-
-                        case SortEnum.UploadDate:
-                            Entries = Entries.OrderByDescending(x => x.UploadDate);
-                            break;
-
-                        case SortEnum.Point:
-                            Entries = Entries.OrderByDescending(x => x.Points);
-                            break;
-                    }
-                });
-            }
+            get { return new DelegateCommand<String>(ChangeSortType); }
         }
 
 #endregion Commands
@@ -242,6 +214,38 @@ namespace SosowaReader.ViewModels
             finally
             {
                 IsLoading = false;
+            }
+
+            ChangeSortType(SortType);
+        }
+
+        private void ChangeSortType(String rawtype)
+        {
+            //表示
+            ChangeSortType((SortEnum)Enum.Parse(typeof(SortEnum), rawtype));
+        }
+
+        private void ChangeSortType(SortEnum sortType)
+        {
+            SortType = sortType;
+
+            switch (SortType)
+            {
+                case SortEnum.Title:
+                    Entries = Entries.OrderBy(x => x.Title);
+                    break;
+
+                case SortEnum.Author:
+                    Entries = Entries.OrderBy(x => x.Author);
+                    break;
+
+                case SortEnum.UploadDate:
+                    Entries = Entries.OrderByDescending(x => x.UploadDate);
+                    break;
+
+                case SortEnum.Point:
+                    Entries = Entries.OrderByDescending(x => x.Points);
+                    break;
             }
         }
 
