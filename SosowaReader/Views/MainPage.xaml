@@ -77,7 +77,7 @@
                             <Button.Flyout>
                                 <MenuFlyout Placement="Top" >
                                     <MenuFlyoutItem Text="タイトル" Command="{Binding SortTypeChangeCommand}" CommandParameter="Title" />
-                                    <MenuFlyoutItem Text="名前" Command="{Binding SortTypeChangeCommand}" CommandParameter="Author" />
+                                    <MenuFlyoutItem Text="作家名" Command="{Binding SortTypeChangeCommand}" CommandParameter="Author" />
                                     <MenuFlyoutItem Text="投稿時間" Command="{Binding SortTypeChangeCommand}" CommandParameter="UploadDate" />
                                     <MenuFlyoutItem Text="POINT" Command="{Binding SortTypeChangeCommand}" CommandParameter="Point" />
                                     <MenuFlyoutSeparator />
