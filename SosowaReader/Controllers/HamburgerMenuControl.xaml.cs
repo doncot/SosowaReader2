@@ -10,7 +10,7 @@ namespace SosowaReader.Controllers
     {
         //メニューの展開値
         public static readonly DependencyProperty IsMenuOpenProperty =
-        DependencyProperty.RegisterAttached("IsMenuOpen", typeof(bool),typeof(HamburgerMenuControl),new PropertyMetadata(false));
+        DependencyProperty.RegisterAttached("IsMenuOpen", typeof(bool), typeof(HamburgerMenuControl), new PropertyMetadata(false));
         public bool IsMenuOpen
         {
             get { return (bool)GetValue(IsMenuOpenProperty); }
