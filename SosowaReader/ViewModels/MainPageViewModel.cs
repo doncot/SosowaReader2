@@ -138,7 +138,7 @@ namespace SosowaReader.ViewModels
             set { SetProperty(ref isLoading, value); }
         }
 
-        private SortEnum sortType;
+        private SortEnum sortType = SortEnum.UploadDate;
         [RestorableState]
         public SortEnum SortType
         {
@@ -185,6 +185,8 @@ namespace SosowaReader.ViewModels
             {
                 IsLoading = false;
             }
+
+            ChangeSortType(SortType);
         }
 
         /// <summary>
@@ -193,30 +195,10 @@ namespace SosowaReader.ViewModels
         /// <returns></returns>
         public async Task Refresh()
         {
-            try
-            {
-                IsLoading = true;
-                var service = new SosowaBrowseService();
-                //ロード時に時間がかかるため、即開けておく
-                Entries = null;
-                Entries = await service.LoadCollectionAsync();
-            }
-            catch (HttpRequestException ex)
-            {
-                var dialog = new MessageDialog(ex.Message, "通信エラーが発生しました");
-                await dialog.ShowAsync();
-            }
-            catch (InvalidOperationException ex)
-            {
-                var dialog = new MessageDialog(ex.Message, "データ展開中に問題が発生しました。");
-                await dialog.ShowAsync();
-            }
-            finally
-            {
-                IsLoading = false;
-            }
+            //既データは破棄
+            Entries = null;
 
-            ChangeSortType(SortType);
+            await Load();
         }
 
         private void ChangeSortType(String rawtype)
