@@ -31,7 +31,7 @@ namespace SosowaReader.ViewModels
         {
             get
             {
-                return DelegateCommand.FromAsyncHandler(Load);
+                return DelegateCommand.FromAsyncHandler(LoadAsync);
                 //return this.refreshCommand = this.refreshCommand ??
                 //    DelegateCommand.FromAsyncHandler(Refresh);
                 // new DelegateCommand(Refresh); //同期版
@@ -159,7 +159,7 @@ namespace SosowaReader.ViewModels
         /// データをロードする。（既データがある場合スルーされる）
         /// </summary>
         /// <returns></returns>
-        public async Task Load()
+        public async Task LoadAsync()
         {
             try
             {
@@ -198,7 +198,7 @@ namespace SosowaReader.ViewModels
             //既データは破棄
             Entries = null;
 
-            await Load();
+            await LoadAsync();
         }
 
         private void ChangeSortType(String rawtype)
