@@ -42,7 +42,7 @@ namespace SosowaReader.ViewModels
         {
             get
             {
-                return DelegateCommand.FromAsyncHandler(Refresh);
+                return DelegateCommand.FromAsyncHandler(RefreshAsync);
             }
         }
 
@@ -193,7 +193,7 @@ namespace SosowaReader.ViewModels
         /// データを再ロードする（既データは破棄される）
         /// </summary>
         /// <returns></returns>
-        public async Task Refresh()
+        public async Task RefreshAsync()
         {
             //既データは破棄
             Entries = null;
