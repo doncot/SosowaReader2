@@ -114,7 +114,8 @@ namespace SosowaReader.ViewModels
 #endregion Commands
 
         private IEnumerable<Entry> entries;
-        [RestorableState]
+        //DateTimeがシリアイズできないせいで落ちる
+        //[RestorableState]
         public IEnumerable<Entry> Entries
         {
             get { return entries; }
