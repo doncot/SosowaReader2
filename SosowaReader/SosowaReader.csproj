@@ -109,6 +109,7 @@
     <Compile Include="Services\BrowserService.cs" />
     <Compile Include="ViewModels\ContentPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\SearchPageViewModel.cs" />
     <Compile Include="Views\ContentPage.xaml.cs">
       <DependentUpon>ContentPage.xaml</DependentUpon>
     </Compile>
