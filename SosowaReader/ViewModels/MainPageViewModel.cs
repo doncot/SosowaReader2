@@ -31,10 +31,7 @@ namespace SosowaReader.ViewModels
         {
             get
             {
-                return DelegateCommand.FromAsyncHandler(LoadAsync);
-                //return this.refreshCommand = this.refreshCommand ??
-                //    DelegateCommand.FromAsyncHandler(Refresh);
-                // new DelegateCommand(Refresh); //同期版
+                return new DelegateCommand(async () => await LoadAsync());
             }
         }
 
@@ -42,7 +39,7 @@ namespace SosowaReader.ViewModels
         {
             get
             {
-                return DelegateCommand.FromAsyncHandler(RefreshAsync);
+                return new DelegateCommand(async () => await RefreshAsync());
             }
         }
 
@@ -61,7 +58,7 @@ namespace SosowaReader.ViewModels
         {
             get
             {
-                return DelegateCommand.FromAsyncHandler(async () =>
+                return new DelegateCommand(async () =>
                 {
                     IsLoading = true;
                     Entries = null;
