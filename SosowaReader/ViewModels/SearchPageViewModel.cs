@@ -16,7 +16,7 @@ namespace SosowaReader.ViewModels
             set { searchCommand = value; }
             get
             {
-                return DelegateCommand.FromAsyncHandler(SearchAsync);
+                return new DelegateCommand(async () => await SearchAsync());
             }
         }
 
