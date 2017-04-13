@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
     "HtmlAgilityPack": "1.4.9.5",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.1",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.2",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0",
     "Prism.Unity": "6.3.0",
     "Prism.Windows": "6.3.0"
