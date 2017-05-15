@@ -15,7 +15,7 @@
         <SplitView.Content>
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <StackPanel>
-                    <AutoSuggestBox Text="{Binding SearchText,Mode=TwoWay}" Header="検索文字列" Width="400" />
+                    <AutoSuggestBox Text="{Binding SearchString,Mode=TwoWay}" Header="検索文字列" Width="400" />
                     <AutoSuggestBox Text="{Binding SearchText,Mode=TwoWay}" Header="作者" Width="400" />
                     <Grid Width="400">
                         <Grid.ColumnDefinitions>

@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Windows.Mvvm;
+using SosowaReader.Models;
 using SosowaReader.Services;
 using System;
 using System.Collections.Generic;
@@ -30,13 +31,24 @@ namespace SosowaReader.ViewModels
             set { SetProperty(ref isLoading, value); }
         }
 
+        private string searchString = "";
+        public string SearchString
+        {
+            get { return searchString; }
+            set { SetProperty(ref searchString, value); }
+        }
+
         public async Task SearchAsync()
         {
             try
             {
                 IsLoading = true;
                 var service = new SosowaBrowseService();
-                await service.LoadCollectionAsync();
+                var query = new EntryQuery
+                {
+                    SearchString = SearchString
+                };
+                var result = await service.SearchEntriesAsync(query);
             }
             catch (HttpRequestException ex)
             {
