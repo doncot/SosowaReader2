@@ -51,11 +51,10 @@ namespace SosowaReader.ViewModels
                 var result = await service.SearchEntriesAsync(query);
             }
             catch (HttpRequestException ex)
-            {
+            { 
                 var dialog = new MessageDialog(ex.Message, "通信エラーが発生しました");
                 await dialog.ShowAsync();
             }
-
             catch (InvalidOperationException ex)
             {
                 var dialog = new MessageDialog(ex.Message, "データ展開中に問題が発生しました。");
