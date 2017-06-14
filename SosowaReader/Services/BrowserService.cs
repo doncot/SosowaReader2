@@ -84,7 +84,9 @@ namespace SosowaReader.Services
         public async Task<List<Entry>> SearchEntriesAsync(EntryQuery query)
         {
             //Build query
-            string queryString = "search?query=";
+            string queryString = "search?";
+            //検索文字列
+            queryString += "query=" + query.SearchString;
             //タグ
             queryString += "&tags=" + query.Tags;
 
